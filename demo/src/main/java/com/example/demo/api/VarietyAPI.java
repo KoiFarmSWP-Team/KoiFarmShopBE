@@ -27,9 +27,10 @@ public class VarietyAPI
         Variety newVariety = varietyService.createNewVariety(variety);
         return ResponseEntity.ok(newVariety);
     }
-//    @DeleteMapping(value = "/api/variety/{id}")
-//    public ResponseEntity deleteVeriety(@PathVariable long id){
-//        Variety deletedVariety = VarietyService.deleteVariety(id);
-//        return ResponseEntity.ok(deletedVariety);
-//    }
+    @DeleteMapping(value = "/api/variety/{id}")
+    public ResponseEntity deleteVeriety(@PathVariable long id)
+    {
+        varietyService.deleteVariety(id);
+        return ResponseEntity.ok().build();
+    }
 }
