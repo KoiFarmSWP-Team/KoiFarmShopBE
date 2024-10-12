@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,12 +20,17 @@ public class KoiPack
 
     private float koiPackPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "Media")
-    private Media media;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "koiPack", cascade = CascadeType.ALL)
+    private List<Media> mediaList;
 
     @ManyToMany
-    Set<Variety> varieties;
+    @JoinTable(
+            name = "koi_pack_variety"
+            , joinColumns = @JoinColumn(name = "variety_id")
+            , inverseJoinColumns = @JoinColumn (name = "koi_pack_id")
+    )
+    Set<Variety> varietyName   ;
+
 
     @ManyToMany
     Set<Breeder> breeders;

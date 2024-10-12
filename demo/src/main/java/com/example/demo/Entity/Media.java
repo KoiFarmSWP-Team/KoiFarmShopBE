@@ -1,10 +1,8 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,11 +15,17 @@ public class Media {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "name can not be blank")
+    @NotBlank(message = "type can not be blank")
     private String type;
 
-    @NotBlank(message = "name can not be blank")
-    private String url;
+    @Lob
+    @NotNull(message = "dat can not be null")
+    private byte[] data;
 
     boolean isDeleted = false;
+
+    @ManyToOne
+    @JoinColumn(name = "koi_pack_id")
+    private KoiPack koiPack;
+
 }
